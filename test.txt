@@ -1,0 +1,77 @@
+./daf_1min -d human -q human_40n -a human_10n.dag -n 100
+Average Search Time Per Query => 67.7507 ms!
+Average Total Time Per Query => 70.2073 ms!
+Average Recursive Call Count => 30885.7683
+Total Number of Found Matches=> 583,517,324,065
+#End Queries=> 82
+
+rank = numInitCand 
+Average Search Time Per Query => 65.5376 ms!
+Average Total Time Per Query => 68.2433 ms!
+Average Recursive Call Count => 28402.9881
+Total Number of Found Matches=> 583,522,333,347
+#End Queries=> 84
+
+rank = degree 
+Average Search Time Per Query => 123.0000 ms!
+Average Total Time Per Query => 126.4896 ms!
+Average Recursive Call Count => 104365.2234
+Total Number of Found Matches=> 9,387,494
+#End Queries=> 94
+
+rank = sqrtDegree*numInitCand
+Average Search Time Per Query => 62.3771 ms!
+Average Total Time Per Query => 64.9348 ms!
+Average Recursive Call Count => 26799.5632
+Total Number of Found Matches=> 583,522,686,088
+#End Queries=> 87
+
+rank = labelSum
+Average Search Time Per Query => 175.3055 ms!
+Average Total Time Per Query => 178.1700 ms!
+Average Recursive Call Count => 152505.5385
+Total Number of Found Matches=> 9,090,511
+#End Queries=> 91
+
+buildDAGÀÇ stablesort »¯À»¶§
+Average Search Time Per Query => 1317.0260 ms!
+Average Total Time Per Query => 1319.7595 ms!
+Average Recursive Call Count => 4276147.0385
+Total Number of Found Matches=> 8,156,926
+#End Queries=> 78
+
+numinitCand*degree*labelSum
+Average Search Time Per Query => 63.0259 ms!
+Average Total Time Per Query => 65.7566 ms!
+Average Recursive Call Count => 26609.4382
+Total Number of Found Matches=> 583,681,399,499
+#End Queries=> 89
+
+rank = numInitCand * degree * sqrt(labelSum);
+Average Search Time Per Query => 80.5654 ms!
+Average Total Time Per Query => 83.8699 ms!
+Average Recursive Call Count => 26609.4382
+Total Number of Found Matches=> 583,681,399,499
+#End Queries=> 89
+
+
+Average Total time per Query
+[ 1000 ~ ] : 0 points
+[ 800 ~ 1000 ] : 4 points
+[ 550 ~ 800 ] : 6 points
+[ 0 ~ 550 ] : 10 points
+
+Average Recursive Call Count
+[ 70001 ~ ] : 0 points
+[ 50001 ~  70000 ] : 4 points
+[ 30001 ~ 50000 ] : 6 points
+[ 0 ~ 30000 ] : 10 points
+
+End Queries
+[ 0 ~ 80 ] : 0 points
+[ 81 ~ 90 ] : 10 points
+[ 91 ~ 100 ] : 15 points 
+
+
+
+

@@ -27,6 +27,7 @@ public class Main{
     static int numDataNode = 0;
     static int[] labelData; // holds label of vertex i
     static int[] degreeData; // holds degree of vertex i
+    static int [][] adjListData; // holds edges of vertex i in data graph
     
     //Variables for query graph
     static int root = -1;
@@ -58,6 +59,7 @@ public class Main{
     		} else if(line_split[0] == "e") {
     			degreeData[Integer.parseInt(line_split[1])] += 1;
     			degreeData[Integer.parseInt(line_split[2])] += 1;
+    			adjListQuery[Integer.parseInt(line_split[1])][0] = Integer.parseInt(line_split[2]);
     		}
     	}
     	
@@ -88,6 +90,17 @@ public class Main{
     
     public static int selectRoot() {
     	int root = -1;
+    	int degree;
+    	double rank;
+    	double rootRank = Double.MAX_VALUE;
+    	for(int i = 0; i< numQueryNode; i++) {
+    		degree = degreeQuery[i];
+    		rank = degree;
+    		if(rank<rootRank) {
+    			root = i;
+    			rootRank = rank;
+    		}
+    	}
     	return root;
     }
     
