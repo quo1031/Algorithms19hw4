@@ -13,9 +13,9 @@ public class Main{
         //find the dag for each query graph
 
     	int numQuery = Integer.parseInt(args[3]);
-    	
+    	int [] DAG;
     	readDataGraph(args[1]);
-    	
+    	BufferedWriter dag = new BufferedWriter(new FileWriter("human_40n.dag"));
     	BufferedReader queryReader = new BufferedReader(new FileReader(args[2]));
     	String line = null;
    
@@ -26,14 +26,18 @@ public class Main{
     		labelQuery =  new int[numQueryNode];
     		degreeQuery =  new int[numQueryNode];
     		numqueryedge = new int [numQueryNode];
+    		DAG = new int [numQueryNode];
     		readQueryGraph(queryReader, numQueryNode);
-    		buildDAG();
+    		DAG = buildDAG();
+    		for(int v = 0; v<numQueryNode; v++) {
+    			dag.write(DAG[v]+" ");
+    		}
+    		dag.newLine();
     	}
     	
     }
     
-   
-
+ 
 	//Variables for data graph
     static int numDataNode = 0;
     static int[] labelData; // holds label of vertex i
@@ -145,18 +149,51 @@ public class Main{
     	return root;
     }
     
-    public static void buildDAG() {
+    public static int [] buildDAG() {
     	char visited[] = new char[numQueryNode];
     	int queue[] = new int[numQueryNode];
     	
     	
-    	
     	root = selectRoot();
+    	
     	visited[root] = 1;
     	queue[0] = root;
+    	int start=0, end=1;
+    	//bfs로 만들어진 level에서 num 순으로 정
+    	Queue<Integer> bfs = new LinkedList<Integer>();
     	
-    	
+    	int v;
+    	bfs.add(root);
+    	while(!bfs.isEmpty()) {
+    		v = bfs.poll();
+    		start=end;
+   // 		end=start+degreeQuery[v]-1;
+    		for(int i=0; i<degreeQuery[v]; i++) {
+    			if(visited[adjListQuery[v][i]]==0) {
+    				bfs.add(adjListQuery[v][i]);
+    				visited[adjListQuery[v][i]]=1;
+    				queue[end]=adjListQuery[v][i];
+    				end++;
+    			}
+    			sortbyedge(queue, start, end);
+    		}	
+    	}	
+    	return queue;
     }
+
+	private static void sortbyedge(int[] queue, int start, int end) {
+		// TODO Auto-generated method stub
+		int temp;
+		for(int i=start; i<end-1; i++) {
+			for (int j=i+1; j<end; j++) {
+				if(numqueryedge[queue[i]]<numqueryedge[queue[j]]) {
+					temp = queue[i];
+					queue[i]=queue[j];
+					queue[j]=temp;
+				}
+			}
+		}
+	}
     
     
     
