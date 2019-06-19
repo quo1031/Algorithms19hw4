@@ -12,8 +12,8 @@ public class Main{
         //read the query grap file
         //find the dag for each query graph
 
-    	System.out.println(args.length);
-    	System.out.println(args[0]);
+    	//System.out.println(args.length);
+    	//System.out.println(args[0]);
     	
     	int numQuery = Integer.parseInt(args[2]);
     	int [] DAG;
@@ -45,9 +45,10 @@ public class Main{
     static int numDataNode = 0;
     static int[] labelData; // holds label of vertex i
     static int[] degreeData; // holds degree of vertex i
-    static int[] adjListData; // holds edges of vertex i in data graph\
-    static int[] adjIndexData;
-    static int[] adjListIndex;
+//    static int[] adjListData; // holds edges of vertex i in data graph\
+    static ArrayList<Integer> adjListData = new ArrayList<Integer>();
+    static ArrayList<Integer> adjIndexData = new ArrayList<Integer>();
+
     
     //Variables for query graph
     static int root = -1;
@@ -125,16 +126,20 @@ public class Main{
     	
     	while((line = dataReader.readLine()) != null) {
     		line_split = line.split(" ");
+    		int index = 0;
+    		adjIndexData.add(index);
     		if(line_split[0].equals("e")) {
     			left = Integer.parseInt(line_split[1]);
     			right = Integer.parseInt(line_split[2]);
 				degreeData[left] += 1;
 				degreeData[right] += 1;
-				
+				adjListData.add(right);
+				++index;
 				if(relabel.contains(labelData[left]) && relabel.contains(labelData[right])) {
 					numedge[relabel.indexOf(labelData[left])][relabel.indexOf(labelData[right])]++;
 				}
 			}
+    		adjIndexData.add(index);
     	}
     	
     }
@@ -193,12 +198,12 @@ public class Main{
     		start=end;
    // 		end=start+degreeQuery[v]-1;
     		for(int i=0; i<degreeQuery[v]; i++) {
-    			if(visited[adjListQuery[v][i]]==0) {
-    				bfs.add(adjListQuery[v][i]);
-    				visited[adjListQuery[v][i]]=1;
-    				queue[end]=adjListQuery[v][i];
-    				end++;
-    			}
+  //  			if(visited[adjListQuery[v][i]]==0) {
+ //   				bfs.add(adjListQuery[v][i]);
+ //   				visited[adjListQuery[v][i]]=1;
+  //  				queue[end]=adjListQuery[v][i];
+ //   				end++;
+   // 			}
     			sortbyedge(queue, start, end);
     		}	
     	}	
