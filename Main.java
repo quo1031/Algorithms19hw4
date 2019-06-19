@@ -33,9 +33,9 @@ public class Main{
     		readQueryGraph(queryReader, numQueryNode);
     		DAG = buildDAG();
     		for(int v = 0; v<numQueryNode; v++) {
-    			dag.write(DAG[v]+" ");
+    			System.out.print(DAG[v]+" ");
     		}
-    		dag.newLine();
+    		System.out.println();
     	}
     	
     }
@@ -137,6 +137,7 @@ public class Main{
 				++index;
 				if(relabel.contains(labelData[left]) && relabel.contains(labelData[right])) {
 					numedge[relabel.indexOf(labelData[left])][relabel.indexOf(labelData[right])]++;
+	numedge[relabel.indexOf(labelData[right])][relabel.indexOf(labelData[left])]++;
 				}
 			}
     		adjIndexData.add(index);
@@ -159,7 +160,7 @@ public class Main{
        		for(int i =0;i<Integer.parseInt(line_split[2]);i++) {
        			adjListQuery.add(Integer.parseInt(line_split[i+3]));
        			numqueryedge[vnum] += numedge[relabel.indexOf(labelQuery[vnum])]
-       					[relabel.indexOf(labelQuery[Integer.parseInt(line_split[i+3])])];      
+       				[relabel.indexOf(labelQuery[Integer.parseInt(line_split[i+3])])];      
        			++index;
        		}
        		adjIndexQuery.add(index);
@@ -185,7 +186,7 @@ public class Main{
     	
     	
     	root = selectRoot();
-    	
+    	//System.out.println("root = "+root);
     	visited[root] = 1;
     	queue[0] = root;
     	int start=0, end=1;
@@ -205,8 +206,8 @@ public class Main{
     				queue[end]=adjListQuery.get(adjIndexQuery.get(v)+i);
     				end++;
     			}
-    			sortbyedge(queue, start, end);
-    		}	
+    		}
+		sortbyedge(queue, start, end);	
     	}	
     	return queue;
     }
