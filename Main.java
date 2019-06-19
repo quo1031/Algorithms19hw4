@@ -1,4 +1,4 @@
-﻿import java.util.*;
+import java.util.*;
 import java.lang.*;
 import java.io.*;
 
@@ -158,7 +158,8 @@ public class Main{
        		degreeQuery[vnum] = Integer.parseInt(line_split[2]);
        		for(int i =0;i<Integer.parseInt(line_split[2]);i++) {
        			adjListQuery.add(Integer.parseInt(line_split[i+3]));
-       			numqueryedge[vnum] += numedge[vnum][Integer.parseInt(line_split[i+3])];
+       			numqueryedge[vnum] += numedge[relabel.indexOf(labelQuery[vnum])]
+       					[relabel.indexOf(labelQuery[Integer.parseInt(line_split[i+3])])];      
        			++index;
        		}
        		adjIndexQuery.add(index);
@@ -198,12 +199,12 @@ public class Main{
     		start=end;
    // 		end=start+degreeQuery[v]-1;
     		for(int i=0; i<degreeQuery[v]; i++) {
-  //  			if(visited[adjListQuery[v][i]]==0) {
- //   				bfs.add(adjListQuery[v][i]);
- //   				visited[adjListQuery[v][i]]=1;
-  //  				queue[end]=adjListQuery[v][i];
- //   				end++;
-   // 			}
+    			if(visited[adjListQuery.get(adjIndexQuery.get(v)+i)] ==0) {
+    				bfs.add(adjListQuery.get(adjIndexQuery.get(v)+i));
+    				visited[adjListQuery.get(adjIndexQuery.get(v)+i)]=1;
+    				queue[end]=adjListQuery.get(adjIndexQuery.get(v)+i);
+    				end++;
+    			}
     			sortbyedge(queue, start, end);
     		}	
     	}	
