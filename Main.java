@@ -1,4 +1,4 @@
-import java.util.*;
+﻿import java.util.*;
 import java.lang.*;
 import java.io.*;
 
@@ -150,6 +150,8 @@ public class Main{
     	String line;
     	int count=0;
     	int index = 0;
+    	adjListQuery.clear();
+    	adjIndexQuery.clear();
     	adjIndexQuery.add(index);
     	while(count++<numQuery) {
     		line = queryReader.readLine();
@@ -181,6 +183,16 @@ public class Main{
     }
     
     public static int [] buildDAG() {
+    	/*
+    	for(int i=0;i<20;i++) {
+    		System.out.print(adjListQuery.get(i)+" ");
+    	}
+    	
+    	System.out.println();
+    	*/
+    	
+    	
+    	
     	char visited[] = new char[numQueryNode];
     	int queue[] = new int[numQueryNode];
     	
@@ -200,7 +212,10 @@ public class Main{
     		start=end;
    // 		end=start+degreeQuery[v]-1;
     		for(int i=0; i<degreeQuery[v]; i++) {
+    			
     			if(visited[adjListQuery.get(adjIndexQuery.get(v)+i)] ==0) {
+    				//System.out.print(adjListQuery.get(i));
+    				//System.out.println(" ");
     				bfs.add(adjListQuery.get(adjIndexQuery.get(v)+i));
     				visited[adjListQuery.get(adjIndexQuery.get(v)+i)]=1;
     				queue[end]=adjListQuery.get(adjIndexQuery.get(v)+i);
@@ -209,7 +224,17 @@ public class Main{
     		}
 		sortbyedge(queue, start, end);	
     	}	
+    	
+
+    	
+    	
+    	
+    	
+    	
+
     	return queue;
+    	
+
     }
 
 	private static void sortbyedge(int[] queue, int start, int end) {
