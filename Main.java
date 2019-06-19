@@ -1,4 +1,4 @@
-﻿import java.util.*;
+import java.util.*;
 import java.lang.*;
 import java.io.*;
 
@@ -18,7 +18,7 @@ public class Main{
     	int numQuery = Integer.parseInt(args[2]);
     	int [] DAG;
     	readDataGraph(args[0]);
-    	BufferedWriter dag = new BufferedWriter(new FileWriter("human_40n.dag"));
+    	//BufferedWriter dag = new BufferedWriter(new FileWriter("human_40n.dag"));
     	BufferedReader queryReader = new BufferedReader(new FileReader(args[1]));
     	String line = null;
    
@@ -97,23 +97,24 @@ public class Main{
 		labelData = new int[numDataNode];
 		degreeData = new int[numDataNode];
     	int count = 0;
+	int v = 0;
     	while(count++<numDataNode) {
     		line = dataReader.readLine();
     		//System.out.println(line);
     		line_split = line.split(" ");
-			int i = 0;
+			
 			//System.out.println(line_split[0]);
     		if(line_split[0].equals("v")) {
-    			labelData[i] = Integer.parseInt(line_split[2]);	
-    			//System.out.println(labelData[i]);
-    			labelset.add(labelData[i]);
-    			i++;
+    			labelData[v] = Integer.parseInt(line_split[2]);	
+    			//System.out.println(v+" : "+labelData[v]);
+    			labelset.add(labelData[v]);
+    			v++;
     		} 
     	}
     	Collections.sort(labelset);
     	relabel.add(labelset.get(0));
     	numlabel.add(1);
-    	for(int i=1; i<labelset.size()-1; i++) {
+    	for(int i=1; i<labelset.size(); i++) {
     		if(labelset.get(i-1) != labelset.get(i)) {
     			relabel.add(labelset.get(i));
     			numlabel.add(1);
@@ -121,7 +122,13 @@ public class Main{
     			numlabel.set(numlabel.size()-1, numlabel.get(numlabel.size()-1)+1);
     		}
     	}
+	
     	numoflabel = relabel.size();
+	/*for(int i=0; i<numoflabel; i++){
+		System.out.print(relabel.get(i)+" ");
+	}
+	System.out.println();
+	System.out.println("numoflabel = "+numoflabel);*/
     	numedge = new int [numoflabel][numoflabel];
     	
     	while((line = dataReader.readLine()) != null) {
@@ -135,11 +142,12 @@ public class Main{
 				degreeData[right] += 1;
 				adjListData.add(right);
 				++index;
-				if(relabel.contains(labelData[left]) && relabel.contains(labelData[right])) {
-					numedge[relabel.indexOf(labelData[left])][relabel.indexOf(labelData[right])]++;
+	//System.out.println(labelData[left]+" "+relabel.indexOf(labelData[left]));
+	numedge[relabel.indexOf(labelData[left])][relabel.indexOf(labelData[right])]++;
+	if(labelData[left]!=labelData[right]){
 	numedge[relabel.indexOf(labelData[right])][relabel.indexOf(labelData[left])]++;
-				}
 			}
+		}
     		adjIndexData.add(index);
     	}
     	
@@ -202,7 +210,7 @@ public class Main{
     	visited[root] = 1;
     	queue[0] = root;
     	int start=0, end=1;
-    	//bfs로 만들어진 level에서 num 순으로 정
+
     	Queue<Integer> bfs = new LinkedList<Integer>();
     	
     	int v;
@@ -225,13 +233,6 @@ public class Main{
 		sortbyedge(queue, start, end);	
     	}	
     	
-
-    	
-    	
-    	
-    	
-    	
-
     	return queue;
     	
 
