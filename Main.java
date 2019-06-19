@@ -33,9 +33,9 @@ public class Main{
     		readQueryGraph(queryReader, numQueryNode);
     		DAG = buildDAG();
     		for(int v = 0; v<numQueryNode; v++) {
-    			System.out.print(DAG[v]+" ");
+    			//System.out.print(DAG[v]+" ");
     		}
-    		System.out.println();
+    		//System.out.println();
     	}
     	
     }
@@ -212,9 +212,22 @@ public class Main{
     	int start=0, end=1;
 
     	Queue<Integer> bfs = new LinkedList<Integer>();
+
+    	
     	
     	int v;
     	bfs.add(root);
+    	
+    	System.out.println(" ");
+    	DFSUtil(root, visited);
+    	/*
+    	for(int i =0;i<numQueryNode;i++) {
+    		if(visited[i]==0) {
+    			DFSUtil(i, visited);
+    		}
+    	}
+    	
+    	
     	while(!bfs.isEmpty()) {
     		v = bfs.poll();
     		start=end;
@@ -232,11 +245,25 @@ public class Main{
     		}
 		sortbyedge(queue, start, end);	
     	}	
+    	*/
     	
     	return queue;
     	
 
     }
+    
+    private static void DFSUtil(int v, char visited[]) {
+    	visited[v] = 1;
+    	System.out.print(v + " ");
+    	Iterator<Integer> i = adjListQuery.listIterator();
+    	while(i.hasNext()) {
+    		int n = i.next();
+    		if(visited[n] == 0) {
+    			DFSUtil(n, visited);
+    		}
+    	}
+    }
+
 
 	private static void sortbyedge(int[] queue, int start, int end) {
 		// TODO Auto-generated method stub

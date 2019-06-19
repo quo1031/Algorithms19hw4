@@ -54,6 +54,35 @@ Average Recursive Call Count => 26609.4382
 Total Number of Found Matches=> 583,681,399,499
 #End Queries=> 89
 
+Java 1:28 PM
+Average Search Time Per Query => 339.1041 ms!
+Average Total Time Per Query => 341.9336 ms!
+Average Recursive Call Count => 769154.8046
+Total Number of Found Matches=> 8,621,618
+#End Queries=> 87
+
+New Root
+Average Search Time Per Query => 1199.0445 ms!
+Average Total Time Per Query => 1202.5865 ms!
+Average Recursive Call Count => 1500323.6098
+Total Number of Found Matches=> 13,677,411
+#End Queries=> 82
+
+rank = degree
+Average Search Time Per Query => 504.0667 ms!
+Average Total Time Per Query => 507.8941 ms!
+Average Recursive Call Count => 578707.7865
+Total Number of Found Matches=> 8,879,903
+#End Queries=> 89
+
+dfs
+Average Search Time Per Query => 72.7651 ms!
+Average Total Time Per Query => 73.5101 ms!
+Average Recursive Call Count => 81403.0510
+Total Number of Found Matches=> 1,585,266
+#End Queries=> 98
+
+
 
 Average Total time per Query
 [ 1000 ~ ] : 0 points
