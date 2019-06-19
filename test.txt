@@ -76,6 +76,13 @@ Average Recursive Call Count => 578707.7865
 Total Number of Found Matches=> 8,879,903
 #End Queries=> 89
 
+alter root
+Average Search Time Per Query => 822.8623 ms!
+Average Total Time Per Query => 825.6857 ms!
+Average Recursive Call Count => 1272424.0000
+Total Number of Found Matches=> 432,957,150,327
+#End Queries=> 89
+
 dfs
 Average Search Time Per Query => 72.7651 ms!
 Average Total Time Per Query => 73.5101 ms!
@@ -90,7 +97,12 @@ Average Recursive Call Count => 633628.0309
 Total Number of Found Matches=> 2,581,603
 #End Queries=> 97
 
-
+dfs alter root
+Average Search Time Per Query => 3.3897 ms!
+Average Total Time Per Query => 4.2081 ms!
+Average Recursive Call Count => 2892.0404
+Total Number of Found Matches=> 163,245,946
+#End Queries=> 99
 
 Average Total time per Query
 [ 1000 ~ ] : 0 points
