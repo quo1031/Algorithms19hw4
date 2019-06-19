@@ -1,4 +1,4 @@
-import java.util.*;
+﻿import java.util.*;
 import java.lang.*;
 import java.io.*;
 
@@ -12,11 +12,14 @@ public class Main{
         //read the query grap file
         //find the dag for each query graph
 
-    	int numQuery = Integer.parseInt(args[3]);
+    	System.out.println(args.length);
+    	System.out.println(args[0]);
+    	
+    	int numQuery = Integer.parseInt(args[2]);
     	int [] DAG;
-    	readDataGraph(args[1]);
+    	readDataGraph(args[0]);
     	BufferedWriter dag = new BufferedWriter(new FileWriter("human_40n.dag"));
-    	BufferedReader queryReader = new BufferedReader(new FileReader(args[2]));
+    	BufferedReader queryReader = new BufferedReader(new FileReader(args[1]));
     	String line = null;
    
     	for(int i = 0; i < numQuery; i++) {
@@ -42,14 +45,20 @@ public class Main{
     static int numDataNode = 0;
     static int[] labelData; // holds label of vertex i
     static int[] degreeData; // holds degree of vertex i
-    static int [][] adjListData; // holds edges of vertex i in data graph
+    static int[] adjListData; // holds edges of vertex i in data graph\
+    static int[] adjIndexData;
+    static int[] adjListIndex;
     
     //Variables for query graph
     static int root = -1;
     static int numQueryNode = 0;
     static int[] labelQuery; // holds label of vertex i in query graph
     static int[] degreeQuery; // holds degree of vertex i in degree graph
-    static int[][] adjListQuery; // holds edges of vertex i in query graph
+    //static int[] adjListQuery; // holds edges of vertex i in query graph
+    static ArrayList<Integer> adjListQuery = new ArrayList<Integer>();
+    //static int[] adjIndexQuery;
+    static ArrayList<Integer> adjIndexQuery = new ArrayList<Integer>();
+
     static int[] numqueryedge;
     
     //Variables for query DAG
@@ -67,12 +76,21 @@ public class Main{
     
     
     public static void readDataGraph(String aFileName) throws IOException{
+
+    		File queryFile = new File(aFileName);
+    		FileReader reader = new FileReader(queryFile);
+    		BufferedReader dataReader = new BufferedReader(reader);
+
+    	
     	int left;
     	int right;
     	
-    	BufferedReader dataReader = new BufferedReader(new FileReader(aFileName));
+
+    	
+    	//BufferedReader dataReader = new BufferedReader(new FileReader(aFileName));
     	String line = null;
     	line = dataReader.readLine();
+    	//System.out.println(line);
     	String[] line_split = line.split(" ");
     	numDataNode = Integer.parseInt(line_split[2]);
 		labelData = new int[numDataNode];
@@ -80,10 +98,13 @@ public class Main{
     	int count = 0;
     	while(count++<numDataNode) {
     		line = dataReader.readLine();
+    		//System.out.println(line);
     		line_split = line.split(" ");
 			int i = 0;
-    		if(line_split[0] == "v") {
-    			labelData[i] = Integer.parseInt(line_split[2]);		
+			//System.out.println(line_split[0]);
+    		if(line_split[0].equals("v")) {
+    			labelData[i] = Integer.parseInt(line_split[2]);	
+    			//System.out.println(labelData[i]);
     			labelset.add(labelData[i]);
     			i++;
     		} 
@@ -104,12 +125,12 @@ public class Main{
     	
     	while((line = dataReader.readLine()) != null) {
     		line_split = line.split(" ");
-    		if(line_split[0] == "e") {
+    		if(line_split[0].equals("e")) {
     			left = Integer.parseInt(line_split[1]);
     			right = Integer.parseInt(line_split[2]);
 				degreeData[left] += 1;
 				degreeData[right] += 1;
-				adjListQuery[Integer.parseInt(line_split[1])][0] = Integer.parseInt(line_split[2]);
+				
 				if(relabel.contains(labelData[left]) && relabel.contains(labelData[right])) {
 					numedge[relabel.indexOf(labelData[left])][relabel.indexOf(labelData[right])]++;
 				}
@@ -122,17 +143,20 @@ public class Main{
     	
     	String line;
     	int count=0;
+    	int index = 0;
+    	adjIndexQuery.add(index);
     	while(count++<numQuery) {
     		line = queryReader.readLine();
     		String[] line_split = line.split(" ");
     		int vnum = Integer.parseInt(line_split[0]); //v number
        		labelQuery[vnum] = Integer.parseInt(line_split[1]);
        		degreeQuery[vnum] = Integer.parseInt(line_split[2]);
-       		adjListQuery[vnum] = new int [Integer.parseInt(line_split[2])];
        		for(int i =0;i<Integer.parseInt(line_split[2]);i++) {
-       			adjListQuery[Integer.parseInt(line_split[0])][i] = Integer.parseInt(line_split[i+3]);
+       			adjListQuery.add(Integer.parseInt(line_split[i+3]));
        			numqueryedge[vnum] += numedge[vnum][Integer.parseInt(line_split[i+3])];
-    		}
+       			++index;
+       		}
+       		adjIndexQuery.add(index);
     	}
 
     }
