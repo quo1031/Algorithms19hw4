@@ -180,12 +180,22 @@ public class Main{
     
     public static int selectRoot() {
     	int root = 0;
-  //  	int degree;
-  //	double rank;
-  //	double rootRank = Double.MAX_VALUE;
+    	int degree;
+	int edge;
+  	double rank;
+  	double rootRank = Double.MAX_VALUE;
     	for(int i = 1; i< numQueryNode; i++) {
-    		if(numqueryedge[i]>numqueryedge[root])
-    			root = i;
+		degree = degreeQuery[i];
+		edge = numqueryedge[i];
+		rank = edge;
+		
+		if(rank<rootRank){
+			root = i;
+			rootRank = rank;
+		}
+
+    		//if(numqueryedge[i]>numqueryedge[root])
+    		//	root = i;
     	}
     	return root;
     }
@@ -218,7 +228,7 @@ public class Main{
     	int v;
     	bfs.add(root);
     	
-    	System.out.println(" ");
+
     	DFSUtil(root, visited);
     	/*
     	for(int i =0;i<numQueryNode;i++) {

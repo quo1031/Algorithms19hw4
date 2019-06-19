@@ -1,9 +1,10 @@
 ./daf_1min -d human -q human_40n -a human_10n.dag -n 100
-Average Search Time Per Query => 67.7507 ms!
-Average Total Time Per Query => 70.2073 ms!
+Average Search Time Per Query => 68.3832 ms!
+Average Total Time Per Query => 70.9575 ms!
 Average Recursive Call Count => 30885.7683
 Total Number of Found Matches=> 583,517,324,065
 #End Queries=> 82
+
 
 rank = numInitCand 
 Average Search Time Per Query => 65.5376 ms!
@@ -81,6 +82,13 @@ Average Total Time Per Query => 73.5101 ms!
 Average Recursive Call Count => 81403.0510
 Total Number of Found Matches=> 1,585,266
 #End Queries=> 98
+
+daf rank = degree
+Average Search Time Per Query => 422.5508 ms!
+Average Total Time Per Query => 423.5187 ms!
+Average Recursive Call Count => 633628.0309
+Total Number of Found Matches=> 2,581,603
+#End Queries=> 97
 
 
 
