@@ -13,7 +13,6 @@ public class Main{
         //find the dag for each query graph
 
     	int numQuery = Integer.parseInt(args[2]);
-    	int [] DAG;
     	readDataGraph(args[0]);
     	BufferedReader queryReader = new BufferedReader(new FileReader(args[1]));
     	String line = null;
@@ -25,9 +24,8 @@ public class Main{
     		labelQuery =  new int[numQueryNode];
     		degreeQuery =  new int[numQueryNode];
     		numQueryEdge = new int [numQueryNode];
-    		DAG = new int [numQueryNode];
     		readQueryGraph(queryReader, numQueryNode);
-    		DAG = buildDAG();
+    		buildDAG();
     	}
     	
     }
@@ -150,13 +148,13 @@ public class Main{
     
     public static int selectRoot() {
     	int root = 0;
-    	int degree;
+
     	int edge;
     	double rank;
     	double rootRank = Double.MAX_VALUE;
     	
     	for(int i = 1; i< numQueryNode; i++) {
-    		degree = degreeQuery[i];
+
     		edge = numQueryEdge[i];
     		rank = edge;
     		if(rank<rootRank){
@@ -167,22 +165,19 @@ public class Main{
     	return root;
     }
     
-    public static int [] buildDAG() {
+    public static void buildDAG() {
     	char visited[] = new char[numQueryNode];
     	int queue[] = new int[numQueryNode];
     	root = selectRoot();
 
     	visited[root] = 1;
-    	queue[0] = root;
+
     	int start=0, end=1;
 
-    	Queue<Integer> bfs = new LinkedList<Integer>();
     	int v;
-    	bfs.add(root);
     	
     	DFSUtil(root, visited);
-    	
-    	return queue;
+   
     }
     
     private static void DFSUtil(int v, char visited[]) {
